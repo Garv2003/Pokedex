@@ -1,15 +1,22 @@
 {
   "name": "server",
-  "version": "1.0.50",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "nodemon src/index.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "elysia": "latest"
-  },
-  "devDependencies": {
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+    "@hapi/hapi": "^21.3.10",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "hapi-auth-jwt2": "^10.6.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.0"
+  }
 }
