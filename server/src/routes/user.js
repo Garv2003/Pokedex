@@ -2,6 +2,7 @@ import joi from 'joi';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import Pokemon from "../models/pokemon.js";
 
 const userPlugin = {
     name: 'userPlugin',
@@ -10,13 +11,15 @@ const userPlugin = {
         server.route({
             method: 'GET',
             path: '/user',
-            handler: function (request, h) {
+            handler: async function (request, h) {
                 try {
+                    const pokemons = await Pokemon.find({ user_id: request.user._id });
                     return {
                         user: {
                             id: request.user._id,
                             name: request.user.name,
-                            email: request.user.email
+                            email: request.user.email,
+                            pokemons: pokemons
                         },
                         success: true,
                         message: 'User info retrieved successfully'

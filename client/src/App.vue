@@ -1,13 +1,10 @@
-<template>
-    <div>
-        <RouterView/>
-    </div>
-</template>
-
 <script setup lang="ts">
-
+import { Background } from './components';
 </script>
 
-<style scoped>
-
-</style>
+<template>
+    <div class="main-container">
+        <Background />
+        <RouterView />
+    </div>
+</template>

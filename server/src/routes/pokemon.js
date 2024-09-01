@@ -28,18 +28,10 @@ const pokemonPlugin = {
         server.route({
             method: 'POST',
             path: '/create_pokemon',
-            options: {
-                validate: {
-                    payload: joi.object({
-                        name: joi.string().required(),
-                        type: joi.string().required()
-                    })
-                }
-            },
             handler: async function (request, h) {
                 try {
-                    const { name, type } = request.payload;
-                    const pokemon = new Pokemon({ name, type });
+                    const { name, id, image, types } = request.payload.pokemon
+                    const pokemon = new Pokemon({ name, types, id, image, user_id: request.user._id });
                     const savedPokemon = await pokemon.save();
                     return h.response({
                         pokemon: savedPokemon,
@@ -47,6 +39,7 @@ const pokemonPlugin = {
                         message: 'Pokemon created successfully'
                     }).code(201);
                 } catch (err) {
+                    console.log(err);
                     return h.response({
                         success: false,
                         message: 'Failed to create pokemon'
