@@ -1,17 +1,13 @@
 <template>
-    <div class="app">
-        <Navbar />
-        <Wrapper>
-            <template v-if="!isDataLoading && currentPokemon">
-                <Description v-if="currentPokemonTab === pokemonTabs.description" />
-                <Evolution v-if="currentPokemonTab === pokemonTabs.evolution" />
-                <Locations v-if="currentPokemonTab === pokemonTabs.locations" />
-                <CapableMoves v-if="currentPokemonTab === pokemonTabs.moves" />
-            </template>
-            <Loader v-else />
-        </Wrapper>
-        <Footer isRoute="true" />
-    </div>
+    <Wrapper>
+        <template v-if="!isDataLoading && currentPokemon">
+            <Description v-if="currentPokemonTab === pokemonTabs.description" />
+            <Evolution v-if="currentPokemonTab === pokemonTabs.evolution" />
+            <Locations v-if="currentPokemonTab === pokemonTabs.locations" />
+            <CapableMoves v-if="currentPokemonTab === pokemonTabs.moves" />
+        </template>
+        <Loader v-else />
+    </Wrapper>
 </template>
 
 <script setup lang="ts">

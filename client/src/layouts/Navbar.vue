@@ -5,10 +5,7 @@
     </div>
     <div class="data">
       <ul>
-        <!-- <div class="underline"></div>
-        <div class="underline"></div>
-        <div class="underline"></div> -->
-        <router-link v-for="(route, index) in navigationRoutes" :key="index" :to="route.route">
+        <router-link v-for="(route, index) in navigationRoutes" :key="index" :to="route.route" v-if="isTab">
           <li>{{ route.name }}</li>
         </router-link>
       </ul>
@@ -20,42 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { navigationRoutes } from "../utils/constants";
 import pokeballIcon from '../assets/pokeball-icon.png';
 import { Menu } from 'lucide-vue-next';
 
-const navigationRoutes = ref([
-  { name: 'Home', route: '/' },
-  { name: 'Compare', route: '/compare' },
-  { name: 'Profile', route: '/profile' },
-  // { name: 'Login', route: '/login' },
-]);
-
 const route = useRoute();
-
-const ul = (index: number) => {
-  const underlines = document.querySelectorAll<HTMLElement>('.underline');
-  underlines.forEach((underline, i) => {
-    underline.style.transform = `translate3d(${index * 100}%, 0, 0)`;
-  });
-};
-
-onMounted(() => {
-  const index = navigationRoutes.value.findIndex(({ route }) =>
-    route.includes(route)
-  );
-  ul(index);
-});
-
-watch(
-  () => route.path,
-  (newPath) => {
-    const index = navigationRoutes.value.findIndex(({ route }) =>
-      newPath.includes(route)
-    );
-    ul(index);
-  }
-);
-
+const isTab = route.path !== '/login' && route.path !== '/register';
 </script>

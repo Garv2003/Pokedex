@@ -1,49 +1,35 @@
 <template>
-    <div class="app">
-        <nav>
-            <div class="block">
-                <img :src="pokeballIcon" alt="Pokeball Icon" />
-            </div>
-            <div class="data"></div>
-            <div class="block"></div>
-        </nav>
-        <Wrapper>
-            <div class="register-container">
-                <form @submit.prevent="handleSubmit" class="register-form">
-                    <h2>Login</h2>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" v-model="email" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" v-model="password" required />
-                    </div>
-                    <span class="register-link">
-                        Don't have an account?
-                        <router-link to="/register">Register</router-link>
-                    </span>
-                    <button type="submit" class="submit-button">Login</button>
-                </form>
-            </div>
-        </Wrapper>
-        <Toaster />
-    </div>
+    <Wrapper>
+        <div class="register-container">
+            <form @submit.prevent="handleSubmit" class="register-form">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" v-model="email" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" v-model="password" required />
+                </div>
+                <span class="register-link">
+                    Don't have an account?
+                    <router-link to="/register">Register</router-link>
+                </span>
+                <button type="submit" class="submit-button">Login</button>
+            </form>
+        </div>
+    </Wrapper>
 </template>
 
 <script setup lang="ts">
-import { Wrapper } from '../layouts';
-import pokeballIcon from '../assets/pokeball-icon.png';
-import axios from 'axios';
-import { useRouter } from 'vue-router';
-
 import { ref } from 'vue';
+import axios from 'axios';
+import { Wrapper } from '../layouts';
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const email = ref('');
 const password = ref('');
-
-
 
 const handleSubmit = async () => {
     if (email.value === '' && password.value === '') {
@@ -60,7 +46,7 @@ const handleSubmit = async () => {
     }
 
     try {
-        const res = await axios.post('http://localhost:8000/auth/login', {
+        const res = await axios.post(import.meta.env.VITE_SERVER_API + '/auth/login', {
             email: email.value,
             password: password.value
         });

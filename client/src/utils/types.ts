@@ -25,8 +25,15 @@ export interface generatedPokemonType {
   types: pokemonTypeInterface[];
 }
 
+export interface UserType {
+  id: number
+  name: string
+  email: string
+  pokemons: userPokemonsType[]
+}
+
 export interface userPokemonsType extends generatedPokemonType {
-  firebaseId?: string;
+  _id: string;
 }
 
 export interface currentPokemonType {
